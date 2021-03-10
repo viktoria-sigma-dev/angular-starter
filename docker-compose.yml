@@ -1,0 +1,15 @@
+version: '3.5'
+services:
+  test-proj-service:
+#    build: .
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        base_image: ${BASE_IMAGE}
+    image: test-proj_local
+    container_name: test-proj-container-docker
+    volumes:
+      - .:/front-end/
+    ports:
+      - 4200:4200

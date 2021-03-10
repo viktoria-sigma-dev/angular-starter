@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  test-proj-unit-debug-service:
+    build:
+      context: ./
+      dockerfile: Dockerfile.unit.debug
+      args:
+        base_image: ${BASE_IMAGE}
+    container_name: test-proj-unit-debug-container-docker
+    volumes:
+      - .:/front-end/
+    ports:
+      - 9876:9876
+    entrypoint: npm run test:docker:debug

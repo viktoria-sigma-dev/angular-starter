@@ -103,7 +103,9 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "test-proj:serve"
+            "devServerTarget": "test-proj:serve",
+            "host": "test-proj-e2e-container-docker",
+            "port": 4200
           },
           "configurations": {
             "production": {

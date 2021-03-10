@@ -1,0 +1,20 @@
+FROM node:10.19-alpine
+
+WORKDIR /front-end/
+COPY . .
+
+RUN npm install -g @angular/cli@6.1.4
+RUN npm install -g karma-cli
+RUN npm i
+RUN apk update && apk upgrade && \
+    echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+    echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
+    apk add --no-cache bash chromium@edge nss@edge
+
+# This line is to tell karma-chrome-launcher where
+# chromium was downloaded and installed to.
+ENV CHROME_BIN /usr/bin/chromium-browser
+
+# Tell Puppeteer to skip installing Chrome.
+# We'll be using the installed package instead.
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true

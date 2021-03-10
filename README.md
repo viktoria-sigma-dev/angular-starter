@@ -1,27 +1,31 @@
-# TestProj
+## Run tests:
+1. to run unit tests in headless mode, run:
+`make start-unit-headless`
+2. Set debugger in "src/app/app.component.spec.ts". To run unit tests in debug mode, run:
+`make start-unit-debug`
+2. to run e2e tests in headless mode, run:
+`make start-e2e-headless`
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.
+## Run e2e locally (works only without debug):
+`What we are doing here: command ng e2e starts angular application automatically and run tests through protractor`
+Ensure, you don't have host and port in "angular.json" for project "test-proj-e2e"
+1. sudo webdriver-manager update --standalone
+2. webdriver-manager start
+3. npm install --force protractor
+4. npm run e2e
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Run debug e2e locally:
+`What we are doing here: we start angular application manually and run tests through protractor command (not e2e)`
+Ensure, you don't have host and port in "angular.json" for project "test-proj-e2e"
+### Tab 1:
+  1. `sudo webdriver-manager update --standalone`
+  2. `webdriver-manager start`
+### Tab 2:
+  1. `npm start`
+### Tab 3:
+  1. `npm install --force protractor`
+  2. `npm run e2e-local-protractor`
+### Chrome:
+  1. Ensure you have "debugger;" in code
+  2. Open a new tab `chrome://inspect/#devices`
+  3. Resume running (blue play button)

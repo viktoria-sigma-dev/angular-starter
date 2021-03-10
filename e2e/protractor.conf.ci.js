@@ -4,24 +4,25 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
-  seleniumAddress: 'http://localhost:4444/wd/hub',
+  baseUrl: 'http://test-proj-e2e-container-docker:4200/',
+  seleniumAddress: 'http://hub:4444/wd/hub/',
   allScriptsTimeout: 11000,
   specs: [
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    chromeOptions: {
+      args: ['--headless', '--no-sandbox', '--disable-gpu']
+    }
   },
   chromeOnly: true,
-  directConnect: true,
-  baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
     print: function() {}
   },
-  SELENIUM_PROMISE_MANAGER: false,
   onPrepare() {
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.e2e.json')

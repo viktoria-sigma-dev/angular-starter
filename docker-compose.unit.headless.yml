@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  test-proj-unit-headless-service:
+    build:
+      context: ./
+      dockerfile: Dockerfile.unit
+      args:
+        base_image: ${BASE_IMAGE}
+    container_name: test-proj-unit-container-docker
+    volumes:
+      - .:/front-end/
+    ports:
+      - 9876:9876
+    entrypoint: npm run test:docker:headless

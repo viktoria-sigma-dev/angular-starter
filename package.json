@@ -4,10 +4,17 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:docker": "ng serve --host 0.0.0.0",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --code-coverage",
+    "test:docker:headless": "ng test --karmaConfig ./src/karma.ci.conf.js --watch=false --code-coverage=true",
+    "test:docker:debug": "ng test --karmaConfig ./src/karma.ci.debug.conf.js",
+    "test:e2e:headless": "ng test --karmaConfig ./src/karma.ci.conf.js --watch=false --code-coverage=true",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "node --inspect-brk node_modules/.bin/ng e2e --protractor-config ./e2e/protractor.conf.js",
+    "e2e-local-protractor": "node --inspect-brk node_modules/.bin/protractor ./e2e/protractor.conf.local.js",
+    "e2e:docker:headless": "ng e2e --protractor-config ./e2e/protractor.conf.ci.js",
+    "e2e:docker:debug": "node --inspect-brk node_modules/.bin/ng e2e --protractor-config ./e2e/protractor.conf.js"
   },
   "private": true,
   "dependencies": {
@@ -21,28 +28,34 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "core-js": "^2.5.4",
-    "rxjs": "^6.0.0",
+    "karma-selenium-webdriver-launcher": "0.0.4",
+    "puppeteer": "^7.1.0",
+    "rxjs": "6.0.0",
+    "selenium-webdriver": "^4.0.0-beta.1",
+    "webdriver-manager": "^12.1.8",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",
-    "@angular/cli": "~6.1.4",
+    "@angular/cli": "^6.1.4",
     "@angular/compiler-cli": "^6.1.0",
     "@angular/language-service": "^6.1.0",
-    "@types/jasmine": "~2.8.6",
+    "@types/jasmine": "^2.8.17",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jest": "^26.0.20",
+    "@types/mocha": "^8.2.0",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~1.7.1",
-    "karma-chrome-launcher": "~2.2.0",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.1.0",
     "karma-coverage-istanbul-reporter": "~2.0.0",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "protractor": "~5.4.0",
+    "protractor": "^5.4.4",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
-    "typescript": "~2.7.2"
+    "typescript": "^2.8.4"
   }
 }

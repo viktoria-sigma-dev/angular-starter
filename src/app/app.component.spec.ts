@@ -7,6 +7,7 @@ describe('AppComponent', () => {
         AppComponent
       ],
     }).compileComponents();
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
   }));
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -22,6 +23,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
+    console.log("something3 ne");
+    // debugger;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to test-proj!');
   }));
 });

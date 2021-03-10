@@ -1,0 +1,47 @@
+version: '3.5'
+services:
+  hub:
+    image: selenium/hub
+    container_name: hub
+    ports:
+      - 4444:4444
+    networks:
+      - viasat_net
+  chrome:
+    image: selenium/node-chrome
+    volumes:
+      - /dev/shm:/dev/shm
+    expose:
+      - 5901
+    ports:
+      - 5901:5900
+    links:
+      - hub
+    environment:
+      - HUB_HOST=hub
+      - HUB_PORT=4444
+    networks:
+      - viasat_net
+  test-proj-e2e-debug-service:
+    build:
+      context: ./
+      dockerfile: Dockerfile.e2e.debug
+      args:
+        base_image: ${BASE_IMAGE}
+    container_name: test-proj-e2e-container-docker
+    volumes:
+      - .:/front-end/
+    ports:
+      - 4200:4200
+      - 9229:9229
+    links:
+      - hub
+      - chrome
+    networks:
+      - viasat_net
+    command: bash -c "npm run e2e:docker:debug"
+
+networks:
+  viasat_net:
+    name: viasat_net
+    external: true
